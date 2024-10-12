@@ -48,9 +48,10 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                     sh """
+                     /*sh """
                         docker image build -t ${params.DockerHubUser}/${params.ImageName}:latest .
-                     """
+                     """*/
+                    sh ls -ltr
                 }
             }
        }

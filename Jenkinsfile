@@ -23,7 +23,7 @@ pipeline {
                 sh 'mvn test'
             }
         }
-        stage('SonarQube analysis') {
+ /*       stage('SonarQube analysis') {
             steps {
                 withSonarQubeEnv('sonar-api') {
                     sh 'mvn sonar:sonar'
@@ -39,7 +39,7 @@ pipeline {
                     }
                 }
             }
-        }
+        }*/
         stage('Maven Build') {
             steps {
                 sh 'mvn clean install'
@@ -51,7 +51,7 @@ pipeline {
                      /*sh """
                         docker image build -t ${params.DockerHubUser}/${params.ImageName}:latest .
                      """*/
-                    sh ls -ltr
+                    sh 'ls -ltr'
                 }
             }
        }

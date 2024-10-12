@@ -1,6 +1,14 @@
 pipeline {
     agent any
     stages {
+        stage('Git Checkout'){
+            steps{
+            gitCheckout(
+                branch: "main",
+                url: "https://github.com/srinivasancodes/calculator-app.git"
+            )
+            }
+        }
         stage('Build') {
             steps {
                 sh 'mvn clean package'
@@ -18,13 +26,13 @@ pipeline {
                 }
             }
         }
-        stage('Build Docker Image') {
-            steps {
-                script {
-                    docker.build('calculator-app')
-                }
+#        stage('Build Docker Image') {
+#            steps {
+#                script {
+#                    docker.build('calculator-app')
+#                }
             }
-        }
+#       }
     }
 }
 

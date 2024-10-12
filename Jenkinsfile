@@ -3,10 +3,7 @@ pipeline {
     stages {
         stage('Git Checkout'){
             steps{
-            gitCheckout(
-                branch: "main",
-                url: "https://github.com/srinivasancodes/calculator-app.git"
-            )
+             checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'https://github.com/srinivasancodes/calculator-app.git']]])
             }
         }
         stage('Build') {

@@ -1,5 +1,12 @@
 pipeline {
     agent any
+    parameters{
+        choice(name: 'action', choices: 'create\ndelete', description: 'Choose create/Destroy')
+        string(name: 'ImageName', description: "name of the docker build", defaultValue: 'calculatorapp')
+        string(name: 'ImageTag', description: "tag of the docker build", defaultValue: 'v1')
+        string(name: 'DockerHubUser', description: "name of the Application", defaultValue: 'srinivasancode')
+    }
+
     stages {
         stage('Git Checkout'){
             steps{
@@ -41,7 +48,9 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build('calculator-app')
+                     sh """
+                        docker image build -t ${params.DockerHubUser}/${params.ImageName}:latest .
+                     """
                 }
             }
        }

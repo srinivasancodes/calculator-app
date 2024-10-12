@@ -54,18 +54,18 @@ pipeline {
                 }
             }
        }
-       stage('Pre-download Java DB') {
+       /*stage('Pre-download Java DB') {
     steps {
         script {
             sh 'trivy --debug --download-java-db'
         }
     }
-}
+}*/
         stage('Docker Image Scan: trivy') {
     steps {
         script {
             sh """
-                trivy --debug image --offline-scan ${params.DockerHubUser}/${params.ImageName}:latest > scan.txt
+                trivy --debug image ${params.DockerHubUser}/${params.ImageName}:latest > scan.txt
                 cat scan.txt
             """
         }

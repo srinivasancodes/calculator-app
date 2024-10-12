@@ -82,7 +82,7 @@ pipeline {
     //sh "docker image push ${params.DockerHubUser}/${project}:${ImageTag}"
     sh "docker image push ${params.DockerHubUser}/${params.ImageName}:latest"   
 }*/
-    stage('Docker Image Push : DockerHub') {
+ /*   stage('Docker Image Push : DockerHub') {
     withCredentials([usernamePassword(
             credentialsId: "docker",
             usernameVariable: "USER",
@@ -93,7 +93,7 @@ pipeline {
     echo "DockerHubUser: ${params.DockerHubUser}"
     echo "ImageName: ${params.ImageName}"
     sh "docker image push ${params.DockerHubUser}/${params.ImageName}:latest"
-}
+}*/
     }
 }
 

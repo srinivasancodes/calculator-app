@@ -51,10 +51,19 @@ pipeline {
                      sh """
                         docker image build -t ${params.DockerHubUser}/${params.ImageName}:latest .
                      """
-                    /*sh 'ls -ltr target'*/
                 }
             }
        }
+       stage('Docker Image Scan: trivy '){
+            steps{
+               script{           
+                   sh """   
+                   trivy image ${params.DockerHubUser}/${params.ImageName}:latest > scan.txt
+                   cat scan.txt
+                   """
+               }
+            }
+        }
     }
 }
 

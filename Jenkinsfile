@@ -38,13 +38,13 @@ pipeline {
                 sh 'mvn clean install'
             }
         }
-/*        stage('Build Docker Image') {
-#            steps {
-#                script {
-#                    docker.build('calculator-app')
-#                }
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    docker.build('calculator-app')
+                }
             }
-       }*/
+       }
     }
 }
 

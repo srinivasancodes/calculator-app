@@ -6,7 +6,7 @@ pipeline {
              checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'https://github.com/srinivasancodes/calculator-app.git']]])
             }
         }
-        stage('Build') {
+        stage('Clean Package') {
             steps {
                 sh 'mvn clean package'
             }
@@ -31,6 +31,11 @@ pipeline {
                         error "Pipeline aborted due to quality gate failure: ${qg.status}"
                     }
                 }
+            }
+        }
+        stage('Maven Build') {
+            steps {
+                sh 'mvn clean install'
             }
         }
 /*        stage('Build Docker Image') {

@@ -72,13 +72,13 @@ pipeline {
     }
 }
 stage('Docker Image Push : DockerHub'){
-    withCredentials([usernamePassword(
+   /* withCredentials([usernamePassword(
             credentialsId: "docker",
             usernameVariable: "USER",
             passwordVariable: "PASS"
     )]) {
         sh "docker login -u '$USER' -p '$PASS'"
-    }
+    }*/
     //sh "docker image push ${params.DockerHubUser}/${project}:${ImageTag}"
     sh "docker image push ${params.DockerHubUser}/${params.ImageName}:latest"   
 }

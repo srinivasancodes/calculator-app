@@ -13,7 +13,7 @@ pipeline {
              checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'https://github.com/srinivasancodes/calculator-app.git']]])
             }
         }
-        stage('Clean Package') {
+        /*stage('Clean Package') {
             steps {
                 sh 'mvn clean package'
             }
@@ -44,14 +44,14 @@ pipeline {
             steps {
                 sh 'mvn clean install'
             }
-        }
+        }*/
         stage('Build Docker Image') {
             steps {
                 script {
                      /*sh """
                         docker image build -t ${params.DockerHubUser}/${params.ImageName}:latest .
                      """*/
-                    sh 'ls -ltr'
+                    sh 'ls -ltr target'
                 }
             }
        }

@@ -13,7 +13,7 @@ pipeline {
              checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'https://github.com/srinivasancodes/calculator-app.git']]])
             }
         }
-        /*stage('Clean Package') {
+        stage('Clean Package') {
             steps {
                 sh 'mvn clean package'
             }
@@ -44,7 +44,7 @@ pipeline {
             steps {
                 sh 'mvn clean install'
             }
-        }*/
+        }
         stage('Build Docker Image') {
             steps {
                 script {
@@ -54,41 +54,30 @@ pipeline {
                 }
             }
        }
-       /*stage('Pre-download Java DB') {
-    steps {
-        script {
-            sh 'trivy --debug --download-java-db'
-        }
-    }
-}*/
-    //Working
-/*
-        stage('Docker Image Scan: trivy') {
-    steps {
-        script {
-            sh """
-                trivy --debug image ${params.DockerHubUser}/${params.ImageName}:latest > scan.txt
-                cat scan.txt
-            """
-        }
-    }
-}*/
-stage('Docker Image Push : DockerHub') {
-    steps {
-        script {
-            withCredentials([usernamePassword(
-                credentialsId: "docker",
-                usernameVariable: "USER",
-                passwordVariable: "PASS"
-            )]) {
-                sh "docker login -u \"$USER\" -p \"$PASS\""
-            }
-            // Uncomment the appropriate line based on your requirements
-            // sh "docker image push ${params.DockerHubUser}/${project}:${ImageTag}"
-            sh "docker image push ${params.DockerHubUser}/${params.ImageName}:latest"
-        }
-    }
-}
+       stage('Docker Image Scan: trivy') {
+           steps {
+               script {
+                   sh """
+                       trivy --debug image ${params.DockerHubUser}/${params.ImageName}:latest > scan.txt
+                       cat scan.txt
+                   """
+               }
+           }
+       }
+       stage('Docker Image Push : DockerHub') {
+           steps {
+               script {
+                   withCredentials([usernamePassword(
+                   credentialsId: "docker",
+                   usernameVariable: "USER",
+                   passwordVariable: "PASS"
+                   )]) {
+                       sh "docker login -u \"$USER\" -p \"$PASS\""
+               }
+               sh "docker image push ${params.DockerHubUser}/${params.ImageName}:latest"
+               }
+           }
+       }
     }
 }
 

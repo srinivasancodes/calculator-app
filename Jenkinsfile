@@ -61,6 +61,8 @@ pipeline {
         }
     }
 }*/
+    //Working
+/*
         stage('Docker Image Scan: trivy') {
     steps {
         script {
@@ -70,7 +72,7 @@ pipeline {
             """
         }
     }
-}
+}*/
 stage('Docker Image Push : DockerHub'){
    /* withCredentials([usernamePassword(
             credentialsId: "docker",
@@ -80,7 +82,8 @@ stage('Docker Image Push : DockerHub'){
         sh "docker login -u '$USER' -p '$PASS'"
     }*/
     //sh "docker image push ${params.DockerHubUser}/${project}:${ImageTag}"
-    sh "docker image push ${params.DockerHubUser}/${params.ImageName}:latest"   
+    //sh "docker image push ${params.DockerHubUser}/${params.ImageName}:latest"  
+    sh 'ls -ltr'
 }
     }
 }

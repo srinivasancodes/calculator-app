@@ -73,17 +73,21 @@ pipeline {
         }
     }
 }*/
-stage('Docker Image Push : DockerHub'){
-   /* withCredentials([usernamePassword(
-            credentialsId: "docker",
-            usernameVariable: "USER",
-            passwordVariable: "PASS"
-    )]) {
-        sh "docker login -u '$USER' -p '$PASS'"
-    }*/
-    //sh "docker image push ${params.DockerHubUser}/${project}:${ImageTag}"
-    //sh "docker image push ${params.DockerHubUser}/${params.ImageName}:latest"  
-    sh 'ls -ltr'
+stage('Docker Image Push : DockerHub') {
+    steps {
+        script {
+            withCredentials([usernamePassword(
+                credentialsId: "docker",
+                usernameVariable: "USER",
+                passwordVariable: "PASS"
+            )]) {
+                sh "docker login -u \"$USER\" -p \"$PASS\""
+            }
+            // Uncomment the appropriate line based on your requirements
+            // sh "docker image push ${params.DockerHubUser}/${project}:${ImageTag}"
+            sh "docker image push ${params.DockerHubUser}/${params.ImageName}:latest"
+        }
+    }
 }
     }
 }

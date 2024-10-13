@@ -86,7 +86,7 @@ pipeline {
                    usernameVariable: "USER",
                    passwordVariable: "PASS"
                    )]) {
-                       sh "curl -X PUT -u admin -T \"$USER:$PASS\" target\*.jar"
+                       sh 'curl -X PUT -u admin -T "$USER:$PASS" target\*.jar'
                }
                }
            }

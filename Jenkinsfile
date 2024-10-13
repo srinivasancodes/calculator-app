@@ -86,7 +86,7 @@ pipeline {
                     usernameVariable: "USER",
                     passwordVariable: "PASS"
                  )]) {
-                 sh 'curl -X PUT -u "$USER:$PASS" -T target/*.jar http://http://172.19.112.8:8082/artifactory/example-repo-local/'
+                 sh 'curl -X PUT -u "$USER:$PASS" -T target/*.jar http://172.19.112.8:8082/artifactory/example-repo-local/'
                  }
         }
     }

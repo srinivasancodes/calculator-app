@@ -78,12 +78,16 @@ pipeline {
                }
            }
        }
-       stage('Docker Image push: JFROG') {
+       stage('Jfrog artifact pushb') {
            steps {
                script {
-                   sh """
-                      ls -ltr
-                   """
+                   withCredentials([usernamePassword(
+                   credentialsId: "jfrog",
+                   usernameVariable: "USER",
+                   passwordVariable: "PASS"
+                   )]) {
+                       sh "curl -X PUT -u admin -T \"\"$USER:$PASS\" target\*.jar"
+               }
                }
            }
        }

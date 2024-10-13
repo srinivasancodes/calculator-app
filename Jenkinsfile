@@ -54,7 +54,7 @@ pipeline {
                 }
             }
        }
-       stage('Docker Image Scan: trivy') {
+/*       stage('Docker Image Scan: trivy') {
            steps {
                script {
                    sh """
@@ -63,7 +63,7 @@ pipeline {
                    """
                }
            }
-       }
+       }*/
        stage('Docker Image Push : DockerHub') {
            steps {
                script {

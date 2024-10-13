@@ -78,6 +78,15 @@ pipeline {
                }
            }
        }
+       stage('Docker Image push: JFROG') {
+           steps {
+               script {
+                   sh """
+                      ls -ltr
+                   """
+               }
+           }
+       }
     }
 }
 

@@ -86,7 +86,7 @@ pipeline {
                     usernameVariable: "USER",
                     passwordVariable: "PASS"
                  )]) {
-                 sh 'curl -X PUT -u "$USER:$PASS" -T target/*.jar http://your-jfrog-url/artifactory/your-repo/'
+                 sh 'curl -X PUT -u "$USER:$PASS" -T target/*.jar http://http://172.19.112.8:8082/artifactory/your-repo/'
                  }
         }
     }

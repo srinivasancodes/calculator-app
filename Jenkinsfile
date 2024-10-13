@@ -78,19 +78,20 @@ pipeline {
                }
            }
        }
-       stage('Jfrog artifact pushb') {
-           steps {
-               script {
-                   withCredentials([usernamePassword(
-                   credentialsId: "jfrog",
-                   usernameVariable: "USER",
-                   passwordVariable: "PASS"
-                   )]) {
-                       sh 'curl -X PUT -u admin -T "$USER:$PASS" target\*.jar'
-               }
-               }
-           }
-       }
+       stage('Jfrog artifact push') {
+          steps {
+            script {
+                withCredentials([usernamePassword(
+                    credentialsId: "jfrog",
+                    usernameVariable: "USER",
+                    passwordVariable: "PASS"
+                 )]) {
+                 sh 'curl -X PUT -u "$USER:$PASS" -T target/*.jar http://your-jfrog-url/artifactory/your-repo/'
+                 }
+        }
+    }
+}
+
     }
 }
 

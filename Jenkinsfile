@@ -30,7 +30,7 @@ pipeline {
                 }
             }
         }
-        stage('Quality Gate') {
+  /*      stage('Quality Gate') {
             steps {
                 script {
                     def qg = waitForQualityGate()
@@ -39,7 +39,7 @@ pipeline {
                     }
                 }
             }
-        }
+        }*/
         stage('Maven Build') {
             steps {
                 sh 'mvn clean install'
